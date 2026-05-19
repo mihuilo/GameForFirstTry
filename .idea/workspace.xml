@@ -4,38 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c141bf2-6238-45b4-9c6e-86c3ac0f0bbb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/FirstGameTry.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/tiles/Grass.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0000.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0001.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0002.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0003.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0004.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0005.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0006.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0007.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0008.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0009.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0010.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0011.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0012.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0013.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0014.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0015.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_water_0001.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/tiles/grass.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/tiles/water.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/tilesets/grass.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/tilesets/water.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rendering/atlas.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/world/generators/decoration_gen.py" afterDir="false" />
+    <list default="true" id="6c141bf2-6238-45b4-9c6e-86c3ac0f0bbb" name="Changes" comment="UP-1: First load generation">
+      <change afterPath="$PROJECT_DIR$/entities/player.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/player/idle/attack1_down.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/player/idle/attack1_left.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/player/idle/attack1_right.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/player/idle/attack1_up.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +28,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;mihuilo&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/mihuilo/GameForFirstTry.git&quot;,
+    &quot;accountId&quot;: &quot;d94fc61b-e711-4bc1-aa2a-e147b49c0e38&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -61,28 +49,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.main.executor": "Run",
-    "Python.world.executor": "Run",
-    "Python.world_renderer.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/User/PycharmProjects/FirstGameTry/assets/tiles",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.player.executor&quot;: &quot;Run&quot;,
+    &quot;Python.world.executor&quot;: &quot;Run&quot;,
+    &quot;Python.world_renderer.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/PycharmProjects/FirstGameTry/assets/tiles&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\User\PycharmProjects\FirstGameTry\assets\tiles" />
       <recent name="C:\Users\User\PycharmProjects\FirstGameTry\game\data" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\PycharmProjects\FirstGameTry\assets\player" />
       <recent name="C:\Users\User\PycharmProjects\FirstGameTry\assets\tiles" />
       <recent name="C:\Users\User\PycharmProjects\FirstGameTry" />
       <recent name="C:\Users\User\PycharmProjects\FirstGameTry\game\data" />
@@ -134,15 +124,38 @@
       <workItem from="1779124531169" duration="1624000" />
       <workItem from="1779138187441" duration="3157000" />
       <workItem from="1779188180618" duration="11000" />
-      <workItem from="1779188535995" duration="6419000" />
+      <workItem from="1779188535995" duration="11330000" />
+      <workItem from="1779217854556" duration="1377000" />
     </task>
+    <task id="LOCAL-00001" summary="UP-1: First load generation">
+      <option name="closed" value="true" />
+      <created>1779196536458</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1779196536458</updated>
+    </task>
+    <task id="LOCAL-00002" summary="UP-1: First load generation">
+      <option name="closed" value="true" />
+      <created>1779196548846</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1779196548846</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="UP-1: First load generation" />
+    <option name="LAST_COMMIT_MESSAGE" value="UP-1: First load generation" />
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/FirstGameTry$main.coverage" NAME="main Coverage Results" MODIFIED="1779195922113" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\User\PycharmProjects\FirstGameTry" />
+    <SUITE FILE_PATH="coverage/FirstGameTry$main.coverage" NAME="main Coverage Results" MODIFIED="1779220139102" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\User\PycharmProjects\FirstGameTry" />
+    <SUITE FILE_PATH="coverage/FirstGameTry$player.coverage" NAME="player Coverage Results" MODIFIED="1779197949847" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\User\PycharmProjects\FirstGameTry" />
     <SUITE FILE_PATH="coverage/FirstGameTry$world_renderer.coverage" NAME="world_renderer Coverage Results" MODIFIED="1779193657899" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\User\PycharmProjects\FirstGameTry" />
     <SUITE FILE_PATH="coverage/FirstGameTry$world.coverage" NAME="world Coverage Results" MODIFIED="1779138870273" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\User\PycharmProjects\FirstGameTry\game" />
   </component>
