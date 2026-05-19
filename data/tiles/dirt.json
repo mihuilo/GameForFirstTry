@@ -1,0 +1,7 @@
+{
+  "id": "dirt",
+  "label": "Земля",
+  "layer": "terrain",
+  "walkable": true,
+  "tileset": "dirt"
+}

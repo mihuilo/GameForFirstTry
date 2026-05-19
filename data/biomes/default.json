@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "label": "Стандартный биом",
+  "terrain_rules": [
+    {
+      "comment": "noise_value от 0.0 до 1.0. Правила проверяются сверху вниз, первое совпадение — победитель.",
+      "tile": "water",
+      "noise_max": 0.45
+    },
+    {
+      "tile": "dirt",
+      "noise_max": 1.0
+    }
+  ]
+}
