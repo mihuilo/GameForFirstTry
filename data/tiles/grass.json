@@ -1,0 +1,11 @@
+{
+  "id": "grass",
+  "label": "Трава",
+  "layer": "decoration",
+  "walkable": true,
+  "tileset": "grass",
+  "spawns_on": ["dirt"],
+  "min_distance_from": {
+    "water": 0
+  }
+}

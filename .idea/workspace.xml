@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6c141bf2-6238-45b4-9c6e-86c3ac0f0bbb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/FirstGameTry.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/tiles/Grass.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0000.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0001.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0002.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0003.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0004.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0005.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0006.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0007.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0008.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0009.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0010.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0011.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0012.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0013.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0014.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_dirt_0015.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/tiles/tile_water_0001.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/tiles/grass.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/tiles/water.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/tilesets/grass.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/tilesets/water.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rendering/atlas.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/world/generators/decoration_gen.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="3DuGR2DggUXVoZrg9u2qcGfWNU2" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.main.executor": "Run",
+    "Python.world.executor": "Run",
+    "Python.world_renderer.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/User/PycharmProjects/FirstGameTry/assets/tiles",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\User\PycharmProjects\FirstGameTry\assets\tiles" />
+      <recent name="C:\Users\User\PycharmProjects\FirstGameTry\game\data" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\PycharmProjects\FirstGameTry\assets\tiles" />
+      <recent name="C:\Users\User\PycharmProjects\FirstGameTry" />
+      <recent name="C:\Users\User\PycharmProjects\FirstGameTry\game\data" />
+      <recent name="C:\Users\User\PycharmProjects\FirstGameTry\game" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="FirstGameTry" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.13 (FirstGameTry)" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\User\PycharmProjects\FirstGameTry" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PY-242.23339.19" />
+        <option value="bundled-python-sdk-0029f7779945-399fe30bd8c1-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.23339.19" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6c141bf2-6238-45b4-9c6e-86c3ac0f0bbb" name="Changes" comment="" />
+      <created>1779124530009</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1779124530009</updated>
+      <workItem from="1779124531169" duration="1624000" />
+      <workItem from="1779138187441" duration="3157000" />
+      <workItem from="1779188180618" duration="11000" />
+      <workItem from="1779188535995" duration="6419000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/FirstGameTry$main.coverage" NAME="main Coverage Results" MODIFIED="1779195922113" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\User\PycharmProjects\FirstGameTry" />
+    <SUITE FILE_PATH="coverage/FirstGameTry$world_renderer.coverage" NAME="world_renderer Coverage Results" MODIFIED="1779193657899" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\User\PycharmProjects\FirstGameTry" />
+    <SUITE FILE_PATH="coverage/FirstGameTry$world.coverage" NAME="world Coverage Results" MODIFIED="1779138870273" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\User\PycharmProjects\FirstGameTry\game" />
+  </component>
+</project>

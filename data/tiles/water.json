@@ -1,0 +1,7 @@
+{
+  "id": "water",
+  "label": "Вода",
+  "layer": "terrain",
+  "walkable": false,
+  "tileset": "water"
+}
