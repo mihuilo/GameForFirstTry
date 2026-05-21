@@ -1,27 +1,11 @@
 """
-AutoTiler — вычисляет визуальный тайл (спрайт) для каждой клетки
-на основе 4-битной маски соседей.
-
-Биты маски:
-    N = 1  (сосед сверху)
-    E = 2  (сосед справа)
-    S = 4  (сосед снизу)
-    W = 8  (сосед слева)
-
-Логика "сосед считается" — если он принадлежит к connects_to тайлсета.
-Например, dirt connects_to=["dirt"], значит только dirt-сосед даёт бит.
-
-Использование:
-    autotiler = AutoTiler(tile_registry, tileset_registry)
-    bitmask = autotiler.compute_bitmask(grid, x, y)
-    sprite  = autotiler.get_sprite(tile_id, bitmask)
+AutoTiler — вычисляет bitmask и возвращает готовый Surface.
 """
 
+import pygame
 from world.tile_registry import TileRegistry
 from world.tileset_registry import TilesetRegistry
 
-# Порядок соседей: (dx, dy, bit)
-# (0, -1) = север, (1, 0) = восток, (0, 1) = юг, (-1, 0) = запад
 _NEIGHBORS = [
     (0, -1, 1),   # N
     (1,  0, 2),   # E
@@ -36,11 +20,9 @@ class AutoTiler:
         self._tilesets = tileset_registry
 
     def compute_bitmask(self, grid: list[list[str]], x: int, y: int) -> int:
-        """
-        grid — двумерный список tile_id (строки = y, колонки = x).
-        Возвращает bitmask 0–15.
-        """
         tile_id = grid[y][x]
+        if not tile_id or not self._tiles.has(tile_id):
+            return 0
         tile_def = self._tiles.get(tile_id)
         tileset_id = tile_def.get("tileset", tile_id)
 
@@ -56,12 +38,49 @@ class AutoTiler:
         for dx, dy, bit in _NEIGHBORS:
             nx, ny = x + dx, y + dy
             if 0 <= nx < width and 0 <= ny < height:
-                neighbor_id = grid[ny][nx]
-                if neighbor_id in connects_to:
+                if grid[ny][nx] in connects_to:
                     bitmask |= bit
-            # Если сосед за границей карты — считаем как "не соединяется"
-            # Можно изменить на "соединяется" если нужно зеркалирование краёв
+        return bitmask
 
+    def compute_bitmask_8(self, grid: list[list[str]], x: int, y: int) -> int:
+        tile_id = grid[y][x]
+        if not tile_id or not self._tiles.has(tile_id):
+            return 0
+        tile_def = self._tiles.get(tile_id)
+        tileset_id = tile_def.get("tileset", tile_id)
+
+        try:
+            connects_to = set(self._tilesets.get_connects_to(tileset_id))
+        except KeyError:
+            return 0
+
+        height = len(grid)
+        width = len(grid[0]) if height > 0 else 0
+
+        def neighbor(dx, dy) -> bool:
+            nx, ny = x + dx, y + dy
+            if 0 <= nx < width and 0 <= ny < height:
+                return grid[ny][nx] in connects_to
+            return False
+
+        n  = neighbor(0, -1)
+        e  = neighbor(1,  0)
+        s  = neighbor(0,  1)
+        w  = neighbor(-1, 0)
+        ne = neighbor(1, -1)
+        se = neighbor(1,  1)
+        sw = neighbor(-1, 1)
+        nw = neighbor(-1,-1)
+
+        bitmask = 0
+        if n:              bitmask |= 1
+        if e:              bitmask |= 2
+        if s:              bitmask |= 4
+        if w:              bitmask |= 8
+        if n and e and ne: bitmask |= 16
+        if s and e and se: bitmask |= 32
+        if s and w and sw: bitmask |= 64
+        if n and w and nw: bitmask |= 128
         return bitmask
 
     def compute_bitmask_deco(self, chunk, lx, ly, deco_getter) -> int:
@@ -73,42 +92,29 @@ class AutoTiler:
         bitmask = 0
         wx = chunk.chunk_x * chunk.size + lx
         wy = chunk.chunk_y * chunk.size + ly
-        if deco_getter(wx, wy - 1) == tile_id: bitmask |= 1  # N
-        if deco_getter(wx + 1, wy) == tile_id: bitmask |= 2  # E
-        if deco_getter(wx, wy + 1) == tile_id: bitmask |= 4  # S
-        if deco_getter(wx - 1, wy) == tile_id: bitmask |= 8  # W
+        if deco_getter(wx,     wy - 1) == tile_id: bitmask |= 1
+        if deco_getter(wx + 1, wy    ) == tile_id: bitmask |= 2
+        if deco_getter(wx,     wy + 1) == tile_id: bitmask |= 4
+        if deco_getter(wx - 1, wy    ) == tile_id: bitmask |= 8
         return bitmask
 
-    def get_sprite_path(self, tile_id: str, bitmask: int) -> str | None:
-        """
-        Возвращает путь к спрайту или None если тайл не autotile.
-        """
+    def get_surface(self, tile_id: str, bitmask: int, world_x: int = 0, world_y: int = 0) -> pygame.Surface | None:
+        """Возвращает готовый Surface для тайла. None если не найден."""
+        if not tile_id or not self._tiles.has(tile_id):
+            return None
         tile_def = self._tiles.get(tile_id)
         tileset_id = tile_def.get("tileset", tile_id)
-
         try:
-            ts_type = self._tilesets.get_type(tileset_id)
+            return self._tilesets.get_surface(tileset_id, bitmask, world_x, world_y)
         except KeyError:
             return None
-
-        if ts_type == "4bit_autotile":
-            return self._tilesets.get_sprite_path(tileset_id, bitmask)
-
-        return None
 
     def get_color(self, tile_id: str) -> tuple | None:
-        """
-        Для solid_color тайлов возвращает (R, G, B), иначе None.
-        """
+        if not tile_id or not self._tiles.has(tile_id):
+            return None
         tile_def = self._tiles.get(tile_id)
         tileset_id = tile_def.get("tileset", tile_id)
-
         try:
-            ts_type = self._tilesets.get_type(tileset_id)
-        except KeyError:
-            return None
-
-        if ts_type == "solid_color":
             return self._tilesets.get_color(tileset_id)
-
-        return None
+        except (KeyError, TypeError):
+            return None

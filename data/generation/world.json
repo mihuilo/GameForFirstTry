@@ -1,5 +1,5 @@
 {
-  "seed": 42,
+  "seed": 40,
   "chunk_size": 16,
   "biome": "default",
   "noise": {

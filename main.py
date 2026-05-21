@@ -16,6 +16,8 @@ from world.generators.terrain_gen import TerrainGenerator
 from rendering.autotiler import AutoTiler
 from rendering.world_renderer import WorldRenderer
 from entities.player import Player
+from ui.menu import PauseMenu
+from ui.minimap import Minimap
 
 BASE_DIR     = os.path.dirname(__file__)
 DATA_TILES   = os.path.join(BASE_DIR, "data/tiles")
@@ -37,7 +39,7 @@ def main():
     clock = pygame.time.Clock()
 
     tile_reg    = TileRegistry(DATA_TILES)
-    tileset_reg = TilesetRegistry(DATA_TSETS, ASSETS_TILES)
+    tileset_reg = TilesetRegistry(DATA_TSETS, ASSETS_TILES, tile_size=TILE_SIZE)
     autotiler   = AutoTiler(tile_reg, tileset_reg)
     renderer    = WorldRenderer(tile_reg, tileset_reg, autotiler, tile_size=TILE_SIZE)
     terrain_gen = TerrainGenerator(DATA_GEN, DATA_BIOMES)
@@ -98,6 +100,10 @@ def main():
 
     font = pygame.font.SysFont("monospace", 14)
 
+    menu = PauseMenu()
+    minimap = Minimap(size=200, tile_radius=24)
+    zoom = menu.zoom
+
     running = True
     while running:
         dt = clock.tick(320) / 1000.0
@@ -105,38 +111,52 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+
             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                menu.toggle()
+                continue  # не передаём ESC дальше в handle_event
+
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_m:
+                minimap.toggle()
+
+            should_quit = menu.handle_event(event)
+            if should_quit:
                 running = False
 
         keys = pygame.key.get_pressed()
         player.update(dt, keys, get_tile_at)
 
         # Камера следует за персонажем
-        cam_x, cam_y = player.get_camera_target(screen.get_width(), screen.get_height())
+        cam_x, cam_y = player.get_camera_target(int(screen.get_width() / zoom), int(screen.get_height() / zoom))
 
-        screen.fill((10, 10, 30))
+        zoom = menu.zoom
+        screen.fill((51 , 157, 181))
+
+        world_w = int(screen.get_width() / zoom)
+        world_h = int(screen.get_height() / zoom)
+        world_surface = pygame.Surface((world_w, world_h))
+        world_surface.fill((51 , 157, 181))
 
         for chunk in chunks.values():
             chunk_px = chunk.chunk_x * chunk_size * TILE_SIZE - int(cam_x)
             chunk_py = chunk.chunk_y * chunk_size * TILE_SIZE - int(cam_y)
             chunk_size_px = chunk_size * TILE_SIZE
 
-            if chunk_px + chunk_size_px < 0 or chunk_px > screen.get_width():
+            if chunk_px + chunk_size_px < 0 or chunk_px > world_w:
                 continue
-            if chunk_py + chunk_size_px < 0 or chunk_py > screen.get_height():
+            if chunk_py + chunk_size_px < 0 or chunk_py > world_h:
                 continue
 
-            renderer.render_chunk(screen, chunk, int(cam_x), int(cam_y), deco_getter=get_deco_at)
+            renderer.render_chunk(world_surface, chunk, int(cam_x), int(cam_y), deco_getter=get_deco_at)
 
-        # Рисуем персонажа поверх мира
-        player.draw(screen, cam_x, cam_y)
+        player.draw(world_surface, cam_x, cam_y)
 
-        fps = clock.get_fps()
-        hud = font.render(
-            f"FPS: {fps:.0f}  ESC — выход",
-            True, (200, 200, 200)
-        )
-        screen.blit(hud, (8, 8))
+        scaled = pygame.transform.scale(world_surface, (screen.get_width(), screen.get_height()))
+        screen.blit(scaled, (0, 0))
+
+        menu.draw(screen)
+        minimap.update(player.x, player.y, TILE_SIZE, get_tile_at)
+        minimap.draw(screen)
         pygame.display.flip()
 
     pygame.quit()

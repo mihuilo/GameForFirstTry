@@ -41,5 +41,8 @@ class TileRegistry:
             raise KeyError(f"TileRegistry: тайл '{tile_id}' не найден")
         return self._tiles[tile_id]
 
+    def has(self, tile_id: str) -> bool:
+        return tile_id in self._tiles
+
     def all(self) -> dict[str, dict]:
         return dict(self._tiles)

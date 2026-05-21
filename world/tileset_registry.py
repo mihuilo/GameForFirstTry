@@ -1,24 +1,20 @@
 """
 TilesetRegistry — загружает правила autotile из data/tilesets/.
-
-Для autotile-тайлов хранит маппинг: bitmask (int) → sprite filename.
-Для solid_color тайлов хранит цвет.
-
-Использование:
-    registry = TilesetRegistry("data/tilesets", "assets/tiles")
-    sprite_name = registry.get_sprite("dirt", bitmask=6)   # → "tile_dirt_0001.png"
-    color       = registry.get_color("water")               # → (30, 100, 200)
+Сам создаёт Atlas и отдаёт готовый Surface — рендер не знает про форматы.
 """
 
 import json
 import os
-
+import pygame
+from rendering.atlas import Atlas
 
 
 class TilesetRegistry:
-    def __init__(self, data_dir: str, assets_dir: str):
+    def __init__(self, data_dir: str, assets_dir: str, tile_size: int = 32):
         self._tilesets: dict[str, dict] = {}
+        self._atlases: dict[str, Atlas] = {}
         self._assets_dir = assets_dir
+        self._tile_size = tile_size
         self._load(data_dir)
 
     def _load(self, data_dir: str):
@@ -36,62 +32,98 @@ class TilesetRegistry:
             if not ts_id:
                 raise ValueError(f"TilesetRegistry: в файле {filename} нет поля 'id'")
 
-            # Для autotile: подготовим bitmask_map с int-ключами
             if data.get("type") == "4bit_autotile":
                 raw_map = data.get("bitmask_map", {})
                 data["_bitmask_map"] = {
                     int(k): v
                     for k, v in raw_map.items()
-                    if k != "comment" and k != "comment2"
+                    if k not in ("comment", "comment2")
                 }
+
+            if data.get("type") == "8bit_autotile":
+                raw_map = data.get("bitmask_map", {})
+                parsed = {}
+                for k, v in raw_map.items():
+                    try:
+                        parsed[int(k)] = v
+                    except ValueError:
+                        pass
+                data["_bitmask_map"] = parsed
 
             self._tilesets[ts_id] = data
 
         print(f"[TilesetRegistry] Загружено тайлсетов: {len(self._tilesets)} → {list(self._tilesets.keys())}")
 
-    def get_sprite_path(self, tileset_id: str, bitmask: int):
-        """
-        Для sprite_prefix → возвращает str (путь к файлу).
-        Для atlas → возвращает tuple (путь к атласу, индекс).
-        """
-        ts = self._get(tileset_id)
-        if ts.get("type") != "4bit_autotile":
-            raise TypeError(f"TilesetRegistry: '{tileset_id}' не является autotile")
+    def _get_atlas(self, ts: dict) -> Atlas | None:
+        atlas_path = ts.get("atlas")
+        if not atlas_path:
+            return None
 
-        bitmask = max(0, min(15, bitmask))
+        if atlas_path not in self._atlases:
+            tile_w = ts.get("tile_size", 16)
+            tile_h = ts.get("tile_size", 16)
+            self._atlases[atlas_path] = Atlas(atlas_path, tile_w, tile_h, scale_to=self._tile_size)
+
+        return self._atlases[atlas_path]
+    def get_surface(self, tileset_id: str, bitmask: int, world_x: int = 0, world_y: int = 0) -> pygame.Surface | None:
+        """Возвращает готовый Surface для тайла по bitmask."""
+        ts = self._get(tileset_id)
+
+
+        if ts.get("type") not in ("4bit_autotile", "8bit_autotile"):
+            return None
+
         sprite_id = ts["_bitmask_map"].get(bitmask)
         if sprite_id is None:
-            raise KeyError(f"TilesetRegistry: нет маппинга для bitmask={bitmask} в '{tileset_id}'")
+            return None
 
-        # Атлас — возвращаем (путь, индекс)
-        if "atlas" in ts:
-            atlas_path = ts["atlas"]
-            index = int(sprite_id)
-            return (atlas_path, index)
+        # Вариативность по координатам
+        if isinstance(sprite_id, list):
+            index = (world_x * 7 + world_y * 13) % len(sprite_id)
+            sprite_id = sprite_id[index]
 
-        # Отдельные файлы — возвращаем путь
+
+        if isinstance(sprite_id, list):
+            index = (world_x * 7 + world_y * 13) % len(sprite_id)
+            sprite_id = sprite_id[index]
+
+        if not sprite_id:
+            return None
+
+        index = int(sprite_id)
+
+        # Атлас
+        atlas = self._get_atlas(ts)
+        if atlas:
+            return atlas.get_by_index(index)
+
+        # Отдельные файлы
         prefix = ts.get("sprite_prefix", "")
-        filename = f"{prefix}{sprite_id}.png"
-        return os.path.join(self._assets_dir, filename)
+        filename = f"{prefix}{str(index).zfill(4)}.png"
+        path = os.path.join(self._assets_dir, filename)
+        if not os.path.exists(path):
+            return None
+        img = pygame.image.load(path).convert_alpha()
 
-    def get_color(self, tileset_id: str) -> tuple[int, int, int]:
-        """
-        Возвращает (R, G, B) для solid_color тайлсетов.
-        """
+        index = int(sprite_id)
+        return pygame.transform.scale(img, (self._tile_size, self._tile_size))
+
+    def get_color(self, tileset_id: str) -> tuple[int, int, int] | None:
         ts = self._get(tileset_id)
         if ts.get("type") != "solid_color":
-            raise TypeError(f"TilesetRegistry: '{tileset_id}' не является solid_color")
+            return None
         return tuple(ts["color"])
 
     def get_type(self, tileset_id: str) -> str:
         return self._get(tileset_id).get("type", "unknown")
 
     def get_connects_to(self, tileset_id: str) -> list[str]:
-        """Список tile_id, с которыми этот тайл 'сливается' при autotile."""
         return self._get(tileset_id).get("connects_to", [tileset_id])
+
+    def has(self, tileset_id: str) -> bool:
+        return tileset_id in self._tilesets
 
     def _get(self, tileset_id: str) -> dict:
         if tileset_id not in self._tilesets:
             raise KeyError(f"TilesetRegistry: тайлсет '{tileset_id}' не найден")
         return self._tilesets[tileset_id]
-

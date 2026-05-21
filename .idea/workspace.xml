@@ -4,14 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c141bf2-6238-45b4-9c6e-86c3ac0f0bbb" name="Changes" comment="UP-1: First load generation">
-      <change afterPath="$PROJECT_DIR$/entities/player.py" afterDir="false" />
+    <list default="true" id="6c141bf2-6238-45b4-9c6e-86c3ac0f0bbb" name="Changes" comment="UP-2: Character add">
+      <change afterPath="$PROJECT_DIR$/assets/tiles/water_atlas.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ui/button.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ui/panel.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ui/slider_h.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ui/slider_v.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/blocks.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/button.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/menu.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/minimap.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/nine_slice.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/slider.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/player/idle/attack1_down.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/player/idle/attack1_left.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/player/idle/attack1_right.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/player/idle/attack1_up.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/generation/world.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/generation/world.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/tilesets/water.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/tilesets/water.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rendering/atlas.py" beforeDir="false" afterPath="$PROJECT_DIR$/rendering/atlas.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rendering/autotiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/rendering/autotiler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rendering/world_renderer.py" beforeDir="false" afterPath="$PROJECT_DIR$/rendering/world_renderer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world/tile_registry.py" beforeDir="false" afterPath="$PROJECT_DIR$/world/tile_registry.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world/tileset_registry.py" beforeDir="false" afterPath="$PROJECT_DIR$/world/tileset_registry.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,34 +62,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.player.executor&quot;: &quot;Run&quot;,
-    &quot;Python.world.executor&quot;: &quot;Run&quot;,
-    &quot;Python.world_renderer.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/PycharmProjects/FirstGameTry/assets/tiles&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.atlas.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.menu.executor": "Run",
+    "Python.minimap.executor": "Run",
+    "Python.player.executor": "Run",
+    "Python.world.executor": "Run",
+    "Python.world_renderer.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/User/PycharmProjects/FirstGameTry/assets/ui",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\User\PycharmProjects\FirstGameTry\assets\ui" />
       <recent name="C:\Users\User\PycharmProjects\FirstGameTry\assets\tiles" />
       <recent name="C:\Users\User\PycharmProjects\FirstGameTry\game\data" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\User\PycharmProjects\FirstGameTry\assets\player" />
+      <recent name="C:\Users\User\PycharmProjects\FirstGameTry\assets\ui" />
       <recent name="C:\Users\User\PycharmProjects\FirstGameTry\assets\tiles" />
+      <recent name="C:\Users\User\PycharmProjects\FirstGameTry\assets\player" />
       <recent name="C:\Users\User\PycharmProjects\FirstGameTry" />
       <recent name="C:\Users\User\PycharmProjects\FirstGameTry\game\data" />
-      <recent name="C:\Users\User\PycharmProjects\FirstGameTry\game" />
     </key>
   </component>
   <component name="RunManager">
@@ -96,6 +113,30 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="FirstGameTry" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.13 (FirstGameTry)" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\User\PycharmProjects\FirstGameTry" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -125,7 +166,9 @@
       <workItem from="1779138187441" duration="3157000" />
       <workItem from="1779188180618" duration="11000" />
       <workItem from="1779188535995" duration="11330000" />
-      <workItem from="1779217854556" duration="1377000" />
+      <workItem from="1779217854556" duration="9346000" />
+      <workItem from="1779263015123" duration="17204000" />
+      <workItem from="1779308951208" duration="10142000" />
     </task>
     <task id="LOCAL-00001" summary="UP-1: First load generation">
       <option name="closed" value="true" />
@@ -143,7 +186,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779196548846</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="UP-2: Character add">
+      <option name="closed" value="true" />
+      <created>1779222856527</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1779222856527</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -151,12 +202,16 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="UP-1: First load generation" />
-    <option name="LAST_COMMIT_MESSAGE" value="UP-1: First load generation" />
+    <MESSAGE value="UP-2: Character add" />
+    <option name="LAST_COMMIT_MESSAGE" value="UP-2: Character add" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/FirstGameTry$main.coverage" NAME="main Coverage Results" MODIFIED="1779220139102" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\User\PycharmProjects\FirstGameTry" />
+    <SUITE FILE_PATH="coverage/FirstGameTry$main.coverage" NAME="main Coverage Results" MODIFIED="1779321787740" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\User\PycharmProjects\FirstGameTry" />
     <SUITE FILE_PATH="coverage/FirstGameTry$player.coverage" NAME="player Coverage Results" MODIFIED="1779197949847" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\User\PycharmProjects\FirstGameTry" />
+    <SUITE FILE_PATH="coverage/FirstGameTry$atlas.coverage" NAME="atlas Coverage Results" MODIFIED="1779230055874" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\User\PycharmProjects\FirstGameTry" />
     <SUITE FILE_PATH="coverage/FirstGameTry$world_renderer.coverage" NAME="world_renderer Coverage Results" MODIFIED="1779193657899" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\User\PycharmProjects\FirstGameTry" />
+    <SUITE FILE_PATH="coverage/FirstGameTry$menu.coverage" NAME="menu Coverage Results" MODIFIED="1779224431309" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\User\PycharmProjects\FirstGameTry" />
+    <SUITE FILE_PATH="coverage/FirstGameTry$minimap.coverage" NAME="minimap Coverage Results" MODIFIED="1779224347510" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\User\PycharmProjects\FirstGameTry" />
     <SUITE FILE_PATH="coverage/FirstGameTry$world.coverage" NAME="world Coverage Results" MODIFIED="1779138870273" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\User\PycharmProjects\FirstGameTry\game" />
   </component>
 </project>
