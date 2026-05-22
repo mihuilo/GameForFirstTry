@@ -34,6 +34,7 @@ class Chunk:
         # Кеш поверхности чанка
         self.cached_surface = None
         self.surface_dirty = True
+        self.objects: dict[tuple[int, int], str] = {}  # (lx, ly) → object_id
 
     def set_tile(self, local_x: int, local_y: int, tile_id: str):
         """Поставить тайл. Автоматически помечает клетку и соседей как dirty."""

@@ -7,12 +7,23 @@ from ui.nine_slice import NineSlice
 from ui.button import Button
 from ui.slider import Slider
 from ui.blocks import (LabelBlock, HintBlock, SliderBlock,
-                       TabBlock, ButtonRowBlock, ExitButtonBlock)
+                       TabBlock, ButtonRowBlock, ExitButtonBlock, CheckboxBlock)
 
 PANEL_SIZES = {
     "small":  (700,  420),
     "medium": (1000, 600),
     "large":  (1300, 910),
+}
+BUTTON_FOR_SIZE = {
+    "small":  "assets/ui/button_4x4.png",
+    "medium": "assets/ui/button_6x6.png",
+    "large":  "assets/ui/button.png",
+}
+
+BUTTON_SLICE_FOR_SIZE = {
+    "small":  4,
+    "medium": 6,
+    "large":  8,
 }
 
 TABS = ["Графика", "Звук"]
@@ -30,6 +41,8 @@ class PauseMenu:
         self._ui_size      = "small"
         self._scroll_offset = 0
         self._should_exit  = False
+        self._show_fps = False
+        self._size_rects: dict[str, pygame.Rect] = {}
 
         self._nine_slice = NineSlice(panel_path, scale=5)
 
@@ -45,13 +58,14 @@ class PauseMenu:
         self._exit_block = ExitButtonBlock(button_path,
                                            on_exit=lambda: setattr(self, '_should_exit', True))
 
+
         # Кнопки размера интерфейса
         self._size_block = ButtonRowBlock(
             label="Размер интерфейса:",
             options={"small": "Маленький", "medium": "Средний", "large": "Большой"},
             button_path=button_path,
             active_getter=lambda: self._ui_size,
-            on_change=lambda k: setattr(self, '_ui_size', k)
+            on_change=lambda k: self._on_size_change(k)
         )
 
         # Блоки вкладки Графика
@@ -62,6 +76,8 @@ class PauseMenu:
                 LabelBlock(lambda: f"Масштаб мира: {self._zoom_percent}%"),
                 SliderBlock(zoom_slider, on_change=lambda v: setattr(self, '_zoom_percent', v)),
                 HintBlock("70%", "120%"),
+                CheckboxBlock("Показывать FPS", value=False,
+                              on_change=lambda v: setattr(self, '_show_fps', v)),
                 self._size_block,
             ],
             "Звук": [
@@ -71,10 +87,19 @@ class PauseMenu:
 
         # Адаптируем scale слайдера при смене размера панели
         self._zoom_slider = zoom_slider
+        self._rebuild_buttons()  # ← добавь сюда
 
     def _on_tab_change(self, tab: str):
         self._active_tab = tab
         self._scroll_offset = 0  # сбрасываем скролл при смене вкладки
+
+    def _on_size_change(self, size_key: str):
+        self._ui_size = size_key
+        self._rebuild_buttons()
+
+    @property
+    def show_fps(self) -> bool:
+        return self._show_fps
 
     @property
     def zoom(self) -> float:
@@ -83,6 +108,27 @@ class PauseMenu:
     def toggle(self):
         self.active = not self.active
         self._scroll_offset = 0
+
+    def _rebuild_buttons(self):
+        path = BUTTON_FOR_SIZE[self._ui_size]
+        slice_size = BUTTON_SLICE_FOR_SIZE[self._ui_size]
+        scale = 3
+
+        self._btn_exit = Button(path, scale, slice_size)
+        self._btn_small = Button(path, scale, slice_size)
+        self._btn_medium = Button(path, scale, slice_size)
+        self._btn_large = Button(path, scale, slice_size)
+        self._tab_btns = {tab: Button(path, scale, slice_size) for tab in TABS}
+
+        self._size_block._btns = {
+            key: Button(path, scale, slice_size)
+            for key in self._size_block._options
+        }
+        self._tab_block._btns = {
+            tab: Button(path, scale, slice_size)
+            for tab in TABS
+        }
+        self._exit_block._btn = Button(path, scale, slice_size)
 
     def handle_event(self, event) -> bool:
         if not self.active:
@@ -95,31 +141,23 @@ class PauseMenu:
         self._active_tab = self._tab_block.active
 
         # Фиксированные блоки снизу
-        self._size_block.handle_event(event)
         self._exit_block.handle_event(event)
 
         if self._should_exit:
             return True
 
-        # Скролл колёсиком
+                # Скролл колёсиком
         if event.type == pygame.MOUSEWHEEL:
             if self._scroll_rect and self._scroll_rect.collidepoint(pygame.mouse.get_pos()):
                 self._scroll_offset -= event.y * 20
                 self._scroll_offset = max(0, self._scroll_offset)
 
-        # Блоки активной вкладки
-        for block in self._tab_blocks.get(self._active_tab, []):
-            block.handle_event(event)
-
-        # Блоки активной вкладки — передаём смещение
-        scroll_origin_y = self._scroll_rect.y if self._scroll_rect else 0
-        scroll_origin_x = self._scroll_rect.x if self._scroll_rect else 0
-
+        # Блоки активной вкладки — один проход с offset
         offset_x = self._scroll_rect.x if self._scroll_rect else 0
         offset_y = self._scroll_rect.y - self._scroll_offset if self._scroll_rect else 0
 
         for block in self._tab_blocks.get(self._active_tab, []):
-            if isinstance(block, (SliderBlock, ButtonRowBlock)):
+            if isinstance(block, (SliderBlock, ButtonRowBlock, CheckboxBlock)):
                 block.handle_event(event, offset_x, offset_y)
             else:
                 block.handle_event(event)
@@ -137,8 +175,8 @@ class PauseMenu:
 
         title_size = max(16, panel_h // 13)
         label_size = max(12, panel_h // 20)
-        font_title = pygame.font.SysFont("monospace", title_size, bold=True)
-        font       = pygame.font.SysFont("monospace", label_size)
+        font_title = pygame.font.Font("assets/fonts/BoldPixels.ttf", title_size)
+        font = pygame.font.Font("assets/fonts/BoldPixels.ttf", label_size)
 
         pad = self.BORDER
 

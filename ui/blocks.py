@@ -87,6 +87,43 @@ class SliderBlock(Block):
         handle_surf = pygame.transform.scale(self._slider._sheet, (hw, hh))
         surface.blit(handle_surf, (handle_x, handle_y))
 
+class CheckboxBlock(Block):
+    """Чекбокс с подписью."""
+
+    def __init__(self, label: str, value: bool = False, on_change=None):
+        self._label     = label
+        self._value     = value
+        self._on_change = on_change
+        self._rect      = None
+
+    @property
+    def value(self) -> bool:
+        return self._value
+
+    def handle_event(self, event, offset_x: int = 0, offset_y: int = 0) -> None:
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            if self._rect:
+                adjusted = self._rect.move(offset_x, offset_y)
+                if adjusted.collidepoint(event.pos):
+                    self._value = not self._value
+                    if self._on_change:
+                        self._on_change(self._value)
+
+    def draw(self, surface, x, y, width, font) -> int:
+        size = font.size("A")[1]
+        self._rect = pygame.Rect(x, y, size, size)
+
+        # Квадрат
+        pygame.draw.rect(surface, (160, 100, 50), self._rect, border_radius=3)
+        if self._value:
+            inner = self._rect.inflate(-4, -4)
+            pygame.draw.rect(surface, (80, 40, 10), inner, border_radius=2)
+
+        # Подпись
+        lbl = font.render(self._label, True, (80, 40, 10))
+        surface.blit(lbl, (x + size + 8, y))
+
+        return y + size + self.GAP
 
 class TabBlock(Block):
     """Вкладки."""
@@ -121,7 +158,10 @@ class TabBlock(Block):
         for i, tab in enumerate(self._tabs):
             rect = pygame.Rect(x + i * tab_w, y, tab_w - 4, tab_h)
             self._rects[tab] = rect
-            self._btns[tab]._state = "pressed" if tab == self._active else "normal"
+            if tab == self._active:
+                self._btns[tab]._state = "pressed"
+            elif self._btns[tab]._state != "hover":
+                self._btns[tab]._state = "normal"
             self._btns[tab].draw(surface, rect, tab, font)
         return y + tab_h + self.GAP
 
@@ -158,20 +198,22 @@ class ButtonRowBlock(Block):
                         self._on_change(key)
 
     def draw(self, surface, x, y, width, font) -> int:
-        # Подпись
         lbl = font.render(self._label, True, (80, 40, 10))
         surface.blit(lbl, (x, y))
         y += lbl.get_height() + 4
 
-        # Кнопки
         btn_w = width // len(self._options)
         btn_h = font.size("A")[1] + 16
+        gap = max(2, btn_w // 20)  # отступ пропорционален ширине кнопки
         self._rects = {}
         active = self._active_getter()
         for i, (key, label) in enumerate(self._options.items()):
-            rect = pygame.Rect(x + i * btn_w, y, btn_w - 4, btn_h)
+            rect = pygame.Rect(x + i * btn_w + gap, y, btn_w - gap * 2, btn_h)
             self._rects[key] = rect
-            self._btns[key]._state = "pressed" if key == active else "normal"
+            if key == active:
+                self._btns[key]._state = "pressed"
+            elif self._btns[key]._state != "hover":
+                self._btns[key]._state = "normal"
             self._btns[key].draw(surface, rect, label, font)
 
         return y + btn_h + self.GAP

@@ -1,0 +1,26 @@
+{
+  "id": "trees",
+  "atlas": "assets/objects/trees/trees.png",
+  "tile_w": 48,
+  "tile_h": 64,
+  "scale": 4.5,
+  "variants": [
+    {"id": "tree1",   "atlas_index": 0},
+    {"id": "tree2",  "atlas_index": 1},
+    {"id": "tree3", "atlas_index": 2},
+    {"id": "tree4",  "atlas_index": 3}
+  ],
+  "walkable": false,
+  "spawns_on": ["dirt"],
+  "min_distance_from": {"water": 2},
+  "spawn_chance": 0.001,
+  "interaction": "chop",
+  "min_distance_from": {
+    "water": 1,
+    "tree1": 3,
+    "tree2": 3,
+    "tree3": 3,
+    "tree4": 3
+  },
+  "min_distance_objects": 3
+}

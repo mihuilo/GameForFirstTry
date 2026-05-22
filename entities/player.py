@@ -30,10 +30,11 @@ class Animation:
 class Player:
     SPEED = 120
 
-    def __init__(self, sprites_dir: str, tile_size: int, tile_registry, world_tile_size: int = 32):
+    def __init__(self, sprites_dir: str, tile_size: int, tile_registry, world_tile_size: int = 32, obj_registry=None):
         self.tile_size = tile_size
         self._world_tile_size = world_tile_size
         self._tile_registry = tile_registry
+        self._obj_registry = obj_registry
 
         self.x = 0.0
         self.y = 0.0
@@ -76,7 +77,7 @@ class Player:
 
         return anims
 
-    def update(self, dt: float, keys, get_tile_at):
+    def update(self, dt, keys, get_tile_at, get_object_at=None):
         dx = dy = 0
 
         if keys[pygame.K_LEFT]  or keys[pygame.K_a]: dx -= 1
@@ -96,9 +97,9 @@ class Player:
             speed *= 0.707
 
         if dx != 0:
-            self._move(dx * speed, 0, get_tile_at)
+            self._move(dx * speed, 0, get_tile_at, get_object_at)
         if dy != 0:
-            self._move(0, dy * speed, get_tile_at)
+            self._move(0, dy * speed, get_tile_at, get_object_at)
 
         state = "run" if self.moving else "idle"
         anim_key = f"{state}_{self.direction}"
@@ -108,16 +109,15 @@ class Player:
 
         self._current_anim.update(dt)
 
-    def _move(self, dx: float, dy: float, get_tile_at):
+    def _move(self, dx: float, dy: float, get_tile_at, get_object_at=None):
         new_x = self.x + dx
         new_y = self.y + dy
         ts = self.tile_size
         wts = self._world_tile_size
 
-        # Хитбокс по ногам — узкая полоска внизу спрайта
         hb_size = self._world_tile_size - 2
         hb_x = new_x + ts / 2 - hb_size / 2
-        hb_y = new_y + ts - hb_size * 2-8  # самый низ спрайта
+        hb_y = new_y + ts - hb_size * 2 - 8
 
         points = [
             (hb_x, hb_y),
@@ -125,15 +125,30 @@ class Player:
             (hb_x, hb_y + hb_size),
             (hb_x + hb_size, hb_y + hb_size),
         ]
+
         for px, py in points:
             tile_x = int(px // wts)
             tile_y = int(py // wts)
-            tile_id = get_tile_at(tile_x, tile_y)
-            if not self._is_walkable(tile_id):
+
+            if not self._is_walkable(get_tile_at(tile_x, tile_y)):
                 return
+
+            if get_object_at:
+                obj_id = get_object_at(tile_x, tile_y)
+                if not self._is_object_walkable(obj_id):
+                    return
 
         self.x = new_x
         self.y = new_y
+
+    def _is_object_walkable(self, obj_id: str) -> bool:
+        if not obj_id:
+            return True
+        try:
+            return self._obj_registry.get(obj_id).get("walkable", True)
+        except KeyError:
+            return True
+
 
     def _is_walkable(self, tile_id: str) -> bool:
         if not tile_id:

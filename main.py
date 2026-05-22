@@ -18,6 +18,9 @@ from rendering.world_renderer import WorldRenderer
 from entities.player import Player
 from ui.menu import PauseMenu
 from ui.minimap import Minimap
+from world.object_registry import ObjectRegistry
+from world.generators.object_gen import ObjectGenerator
+from rendering.object_renderer import ObjectRenderer
 
 BASE_DIR     = os.path.dirname(__file__)
 DATA_TILES   = os.path.join(BASE_DIR, "data/tiles")
@@ -38,11 +41,14 @@ def main():
     pygame.display.set_caption("IndieGame")
     clock = pygame.time.Clock()
 
-    tile_reg    = TileRegistry(DATA_TILES)
+    tile_reg = TileRegistry(DATA_TILES)
     tileset_reg = TilesetRegistry(DATA_TSETS, ASSETS_TILES, tile_size=TILE_SIZE)
-    autotiler   = AutoTiler(tile_reg, tileset_reg)
-    renderer    = WorldRenderer(tile_reg, tileset_reg, autotiler, tile_size=TILE_SIZE)
+    autotiler = AutoTiler(tile_reg, tileset_reg)
+    renderer = WorldRenderer(tile_reg, tileset_reg, autotiler, tile_size=TILE_SIZE)
     terrain_gen = TerrainGenerator(DATA_GEN, DATA_BIOMES)
+    obj_registry = ObjectRegistry("data/objects", tile_size=TILE_SIZE)
+    obj_gen = ObjectGenerator(obj_registry, seed=42)
+    obj_renderer = ObjectRenderer(obj_registry, tile_size=TILE_SIZE)
 
     chunks: dict[tuple[int,int], Chunk] = {}
     chunk_size = 16
@@ -80,6 +86,12 @@ def main():
     for chunk in chunks.values():
         chunk.decoration = deco_gen.fill_chunk(chunk, get_tile_at)
 
+    obj_registry = ObjectRegistry("data/objects", tile_size=TILE_SIZE)
+    obj_gen = ObjectGenerator(obj_registry, seed=42)
+
+    for chunk in chunks.values():
+        chunk.objects = obj_gen.fill_chunk(chunk, get_tile_at)
+
     deco_map: dict[tuple[int, int], str] = {}
     for chunk in chunks.values():
         for (lx, ly), tile_id in chunk.decoration.items():
@@ -87,11 +99,21 @@ def main():
             wy = chunk.chunk_y * chunk_size + ly
             deco_map[(wx, wy)] = tile_id
 
+    def get_object_at(wx: int, wy: int) -> str:
+        cx = wx // chunk_size
+        cy = wy // chunk_size
+        lx = wx % chunk_size
+        ly = wy % chunk_size
+        c = chunks.get((cx, cy))
+        if c and hasattr(c, 'objects'):
+            return c.objects.get((lx, ly), "")
+        return ""
+
     def get_deco_at(wx: int, wy: int) -> str:
         return deco_map.get((wx, wy), "")
 
     # --- Персонаж ---
-    player = Player(ASSETS_PLAYER, TILE_SIZE*5, tile_reg, world_tile_size=TILE_SIZE)
+    player = Player(ASSETS_PLAYER, TILE_SIZE*5, tile_reg, world_tile_size=TILE_SIZE, obj_registry=obj_registry)
     player.x = 0.0
     player.y = 0.0
 
@@ -124,32 +146,34 @@ def main():
                 running = False
 
         keys = pygame.key.get_pressed()
-        player.update(dt, keys, get_tile_at)
+        player.update(dt, keys, get_tile_at, get_object_at)
 
         # Камера следует за персонажем
         cam_x, cam_y = player.get_camera_target(int(screen.get_width() / zoom), int(screen.get_height() / zoom))
 
         zoom = menu.zoom
-        screen.fill((51 , 157, 181))
+        screen.fill((51, 157, 181))
 
         world_w = int(screen.get_width() / zoom)
         world_h = int(screen.get_height() / zoom)
         world_surface = pygame.Surface((world_w, world_h))
-        world_surface.fill((51 , 157, 181))
+        world_surface.fill((51, 157, 181))
 
         for chunk in chunks.values():
             chunk_px = chunk.chunk_x * chunk_size * TILE_SIZE - int(cam_x)
             chunk_py = chunk.chunk_y * chunk_size * TILE_SIZE - int(cam_y)
             chunk_size_px = chunk_size * TILE_SIZE
 
-            if chunk_px + chunk_size_px < 0 or chunk_px > world_w:
-                continue
-            if chunk_py + chunk_size_px < 0 or chunk_py > world_h:
-                continue
+            # Увеличиваем отступ для объектов которые выступают за границы чанка
+            obj_margin = TILE_SIZE * 12
 
+            if chunk_px + chunk_size_px < -obj_margin or chunk_px > world_w + obj_margin:
+                continue
+            if chunk_py + chunk_size_px < -obj_margin or chunk_py > world_h + obj_margin:
+                continue
             renderer.render_chunk(world_surface, chunk, int(cam_x), int(cam_y), deco_getter=get_deco_at)
 
-        player.draw(world_surface, cam_x, cam_y)
+        obj_renderer.render_sorted(world_surface, chunks, int(cam_x), int(cam_y), chunk_size, player, cam_x, cam_y)
 
         scaled = pygame.transform.scale(world_surface, (screen.get_width(), screen.get_height()))
         screen.blit(scaled, (0, 0))
@@ -157,6 +181,12 @@ def main():
         menu.draw(screen)
         minimap.update(player.x, player.y, TILE_SIZE, get_tile_at)
         minimap.draw(screen)
+
+        if menu.show_fps:
+            fps = clock.get_fps()
+            fps_txt = font.render(f"FPS: {fps:.0f}", True, (200, 200, 200))
+            screen.blit(fps_txt, (8, 8))
+
         pygame.display.flip()
 
     pygame.quit()

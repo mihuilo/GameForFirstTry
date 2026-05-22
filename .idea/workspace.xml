@@ -4,27 +4,40 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c141bf2-6238-45b4-9c6e-86c3ac0f0bbb" name="Changes" comment="UP-2: Character add">
-      <change afterPath="$PROJECT_DIR$/assets/tiles/water_atlas.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/ui/button.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/ui/panel.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/ui/slider_h.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/ui/slider_v.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/blocks.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/button.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/menu.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/minimap.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/nine_slice.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/slider.py" afterDir="false" />
+    <list default="true" id="6c141bf2-6238-45b4-9c6e-86c3ac0f0bbb" name="Changes" comment="UP-3: Water model full update + map + built for settings page">
+      <change afterPath="$PROJECT_DIR$/assets/fonts/BoldPixels.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/objects/trees/trees.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ui/button_4x4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ui/button_6x6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/objects/trees.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rendering/object_renderer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/world/generators/object_gen.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/world/object_registry.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tiles/tile_dirt_0000.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tiles/tile_dirt_0001.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tiles/tile_dirt_0002.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tiles/tile_dirt_0003.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tiles/tile_dirt_0004.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tiles/tile_dirt_0005.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tiles/tile_dirt_0006.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tiles/tile_dirt_0007.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tiles/tile_dirt_0008.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tiles/tile_dirt_0009.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tiles/tile_dirt_0010.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tiles/tile_dirt_0011.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tiles/tile_dirt_0012.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tiles/tile_dirt_0013.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tiles/tile_dirt_0014.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tiles/tile_dirt_0015.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tiles/tile_water_0001.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data/generation/world.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/generation/world.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/tilesets/water.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/tilesets/water.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entities/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/entities/player.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rendering/atlas.py" beforeDir="false" afterPath="$PROJECT_DIR$/rendering/atlas.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rendering/autotiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/rendering/autotiler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rendering/world_renderer.py" beforeDir="false" afterPath="$PROJECT_DIR$/rendering/world_renderer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world/tile_registry.py" beforeDir="false" afterPath="$PROJECT_DIR$/world/tile_registry.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/world/tileset_registry.py" beforeDir="false" afterPath="$PROJECT_DIR$/world/tileset_registry.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/blocks.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/blocks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/button.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/button.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/menu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/world/chunk.py" beforeDir="false" afterPath="$PROJECT_DIR$/world/chunk.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,26 +75,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.atlas.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.menu.executor": "Run",
-    "Python.minimap.executor": "Run",
-    "Python.player.executor": "Run",
-    "Python.world.executor": "Run",
-    "Python.world_renderer.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/User/PycharmProjects/FirstGameTry/assets/ui",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.atlas.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.menu.executor&quot;: &quot;Run&quot;,
+    &quot;Python.minimap.executor&quot;: &quot;Run&quot;,
+    &quot;Python.player.executor&quot;: &quot;Run&quot;,
+    &quot;Python.world.executor&quot;: &quot;Run&quot;,
+    &quot;Python.world_renderer.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/PycharmProjects/FirstGameTry/assets/ui&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\User\PycharmProjects\FirstGameTry\assets\ui" />
@@ -90,10 +103,10 @@
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\User\PycharmProjects\FirstGameTry\assets\ui" />
+      <recent name="C:\Users\User\PycharmProjects\FirstGameTry\data\objects" />
+      <recent name="C:\Users\User\PycharmProjects\FirstGameTry\assets\objects\trees" />
+      <recent name="C:\Users\User\PycharmProjects\FirstGameTry\assets\fonts" />
       <recent name="C:\Users\User\PycharmProjects\FirstGameTry\assets\tiles" />
-      <recent name="C:\Users\User\PycharmProjects\FirstGameTry\assets\player" />
-      <recent name="C:\Users\User\PycharmProjects\FirstGameTry" />
-      <recent name="C:\Users\User\PycharmProjects\FirstGameTry\game\data" />
     </key>
   </component>
   <component name="RunManager">
@@ -168,7 +181,13 @@
       <workItem from="1779188535995" duration="11330000" />
       <workItem from="1779217854556" duration="9346000" />
       <workItem from="1779263015123" duration="17204000" />
-      <workItem from="1779308951208" duration="10142000" />
+      <workItem from="1779308951208" duration="10575000" />
+      <workItem from="1779350117489" duration="7870000" />
+      <workItem from="1779377322835" duration="3215000" />
+      <workItem from="1779383079127" duration="79000" />
+      <workItem from="1779392330475" duration="3596000" />
+      <workItem from="1779455650512" duration="2179000" />
+      <workItem from="1779458080298" duration="1941000" />
     </task>
     <task id="LOCAL-00001" summary="UP-1: First load generation">
       <option name="closed" value="true" />
@@ -194,19 +213,39 @@
       <option name="project" value="LOCAL" />
       <updated>1779222856527</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="UP-3: Water model full update + map + built for settings page">
+      <option name="closed" value="true" />
+      <created>1779322045784</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1779322045784</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="UP-1: First load generation" />
     <MESSAGE value="UP-2: Character add" />
-    <option name="LAST_COMMIT_MESSAGE" value="UP-2: Character add" />
+    <MESSAGE value="UP-3: Water model full update + map + built for settings page" />
+    <option name="LAST_COMMIT_MESSAGE" value="UP-3: Water model full update + map + built for settings page" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/FirstGameTry$main.coverage" NAME="main Coverage Results" MODIFIED="1779321787740" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\User\PycharmProjects\FirstGameTry" />
+    <SUITE FILE_PATH="coverage/FirstGameTry$main.coverage" NAME="main Coverage Results" MODIFIED="1779459693156" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\User\PycharmProjects\FirstGameTry" />
     <SUITE FILE_PATH="coverage/FirstGameTry$player.coverage" NAME="player Coverage Results" MODIFIED="1779197949847" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\User\PycharmProjects\FirstGameTry" />
     <SUITE FILE_PATH="coverage/FirstGameTry$atlas.coverage" NAME="atlas Coverage Results" MODIFIED="1779230055874" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\User\PycharmProjects\FirstGameTry" />
     <SUITE FILE_PATH="coverage/FirstGameTry$world_renderer.coverage" NAME="world_renderer Coverage Results" MODIFIED="1779193657899" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\User\PycharmProjects\FirstGameTry" />
